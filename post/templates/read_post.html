@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block container %}
+<h2>{{post.title}}</h2>
+
+<div>
+    作者：<span style="color: red;">{{ post.auth.nickname }}</span>
+    {{post.created | date:"Y-m-d H:i:s"}}
+    {% if request.session.uid == post.uid %}
+    <a href="/post/edit/?post_id={{post.id}}">修改</a>
+    {% endif %}
+    <a href="/post/delete/?post_id={{post.id}}">删除</a>
+</div>
+<hr>
+<p>
+    {{post.content | safe | escape | linebreaks}}
+</p>
+
+{% if post.tags %}
+<div>
+    <strong>Tags:</strong>
+    {% for tag in post.tags %}
+    <a href="/post/tag/?tag_id={{tag.id}}">{{tag.name}}</a>
+    {% endfor %}
+</div>
+{% endif %}
+
+<hr>
+<form method="POST" action="/post/comment/">
+    {% csrf_token %}
+    <input type="hidden" name="post_id" value="{{post.id}}"><br>
+    <textarea name="content" rows="3"></textarea><br>
+    <input type="submit" name="发表评论">
+</form>
+<hr>
+<div>
+    {% for comment in post.comments %}
+    <p>
+        <div><strong>姓名：</strong>{{comment.auth.nickname}}</div>
+        <div><strong>时间：</strong>{{comment.created | date:"Y-m-d H:i:s"}}</div>
+        <div><strong>内容：</strong>{{comment.content|safe|escape|linebreaks}}</div>
+        <div><a href="/post/del_comment/?comment_id={{comment.id}}&post_id={{post.id}}">删除评论</a></div>
+    </p>
+    {% if not forloop.last %}<hr>{% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

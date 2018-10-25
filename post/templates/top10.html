@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<!--
+页面样式
+
+1. aaaa 30
+2. bbbb 27
+3. cccc 19
+
+ -->
+
+<body style="background-color: transparent;">
+    <ol>
+        {% for d in rank_data %}
+        <li>
+            <a href="/post/read/?post_id={{d.0.id}}" onclick="window.top.location.href=this.href">{{d.0.title}}</a>
+            <span style="float: right;">{{d.1}}</span>
+        </li>
+        {% endfor %}
+    </ol>
+</body>
+</html>

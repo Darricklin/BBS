@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block container %}
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">头像</label>
+        <div class="col-sm-5">
+            <img src="{{request.session.avatar}}" height="60px" width="60px">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">昵称</label>
+        <div class="col-sm-5">
+            <input class="form-control"  value="{{user.nickname}}" readonly>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">年龄</label>
+        <div class="col-sm-5">
+            <input class="form-control" value="{{user.age}}" readonly>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">性别</label>
+        <div class="col-sm-5">
+            <input class="form-control" value="{{user.sex}}" readonly>
+        </div>
+    </div>
+</div>
+{% endblock %}

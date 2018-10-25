@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block container %}
+    <h2>{{tag.name}}</h2>
+    <hr>
+    <div class="list-group">
+        {% for post in tag.posts %}
+        <a class="list-group-item" href="/post/read/?post_id={{post.id}}">
+            <span class="text-info">{{post.created | date:"Y-m-d H:i:s"}}</span>
+            <strong>{{post.title}}</strong>
+        </a>
+        {% empty %}
+        <div>没找到相关文章</div>
+        {% endfor %}
+    </div>
+{% endblock %}
